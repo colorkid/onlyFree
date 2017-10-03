@@ -41,8 +41,7 @@
       }
     ];
 
-    /*var reserved = [9983, 5523, 3332, 2231, 6645, 1132, 33344, 9967, 3324, 1154, 9803, 8627, 3323, 3322];
-    var reservedStr = reserved.join(", ");*/
+    var reserved = "";
 
     var xhr = new XMLHttpRequest();
 	xhr.open('GET', 'reserved.json', true);
@@ -59,7 +58,7 @@
 	    return;
 	  }
 
-	  alert(typeof this.responseText);
+	  reserved =  this.responseText;
 	}
 
     var realEstate = document.querySelector(".real-estate");
