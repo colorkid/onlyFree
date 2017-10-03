@@ -42,7 +42,6 @@
     ];
 
     var reserved = "";
-
     
 
 	var request = new XMLHttpRequest();
@@ -52,7 +51,7 @@
 	  if (this.status >= 200 && this.status < 400) {
 	    // Success!
 	    var data = JSON.parse(this.response);
-		  console.log(data);
+		  reserved = data.join(", ");
 	  } else {
 	    // We reached our target server, but it returned an error
 
