@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>Только свободные квартиры</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+  <body>
+  	<div class="real-estate"></div>
+    <script type="text/javascript">
+    var allApartments = [
+      {
+        name: "2-х комнатная квартира на Литейном",
+        id: 3323
+      },
+      {
+        name: "1-ком. квартира ул. Ольминского",
+        id: 5523
+      },
+      {
+        name: "3-х комнатная квартира Приморский проспект",
+        id: 1154
+      },
+      {
+        name: "2-х комнатные апартаменты на Пулковском шоссе",
+        id: 8124
+      },
+      {
+        name: "Студия в Девяткино",
+        id: 5478
+      },
+      {
+        name: "Студия в Шушарах",
+        id: 2245
+      },
+      {
+        name: "1-ком. квартира Москвоский пр.",
+        id: 6645
+      }
+    ];
+
+    var reserved = [9983, 5523, 3332, 2231, 6645, 1132, 33344, 9967, 3324, 1154, 9803, 8627, 3323, 3322];
+    var reservedStr = reserved.join(", ");
+
+    var realEstate = document.querySelector(".real-estate");
+    var index = 0;
+
+    for (var i = 0; i < allApartments.length; i++){
+      index = reservedStr.indexOf(allApartments[i].id);
+      if (index == -1){
+        var apartment = document.createElement("div");
+        apartment.innerHTML = allApartments[i].name;
+        realEstate.appendChild(apartment);
+      };
+    };
+ 
+    
+    </script>
+  </body>
+</html> 
