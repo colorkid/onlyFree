@@ -41,8 +41,26 @@
       }
     ];
 
-    var reserved = [9983, 5523, 3332, 2231, 6645, 1132, 33344, 9967, 3324, 1154, 9803, 8627, 3323, 3322];
-    var reservedStr = reserved.join(", ");
+    /*var reserved = [9983, 5523, 3332, 2231, 6645, 1132, 33344, 9967, 3324, 1154, 9803, 8627, 3323, 3322];
+    var reservedStr = reserved.join(", ");*/
+
+    var xhr = new XMLHttpRequest();
+	xhr.open('GET', 'reserved.json', true);
+	xhr.send();
+	xhr.onreadystatechange = function() {
+
+	  if (this.readyState != 4) {
+	  	return
+	  };
+
+	  if (this.status != 200) {
+	   
+	    alert( 'ошибка: ' + (this.status ? this.statusText : 'запрос не удался') );
+	    return;
+	  }
+
+	  alert(this.responseText);
+	}
 
     var realEstate = document.querySelector(".real-estate");
     var index = 0;
