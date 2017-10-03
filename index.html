@@ -43,31 +43,34 @@
 
     var reserved = "";
 
-    var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'reserved.json', true);
-	xhr.send();
-	xhr.onreadystatechange = function() {
+    
 
-	  if (this.readyState != 4) {
-	  	return
-	  };
+	var request = new XMLHttpRequest();
+	request.open('GET', 'reserved.json', true);
 
-	  if (this.status != 200) {
-	   
-	    alert( 'ошибка: ' + (this.status ? this.statusText : 'запрос не удался') );
-	    return;
+	request.onload = function() {
+	  if (this.status >= 200 && this.status < 400) {
+	    // Success!
+	    var data = JSON.parse(this.response);
+		  console.log(data);
+	  } else {
+	    // We reached our target server, but it returned an error
+
 	  }
-		
-	  
-	  reserved = this.responseText.split(", ");
-		console.log(reserved);
-	}
+	};
+
+	request.onerror = function() {
+	  // There was a connection error of some sort
+	};
+
+	request.send();
+
 
     var realEstate = document.querySelector(".real-estate");
     var index = 0;
 
     for (var i = 0; i < allApartments.length; i++){
-      index = reserved.indexOf(allApartments[i].id);
+      index = data.indexOf(allApartments[i].id);
       if (index == -1){
         var apartment = document.createElement("div");
         apartment.innerHTML = allApartments[i].name;
