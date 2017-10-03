@@ -57,8 +57,10 @@
 	    alert( 'ошибка: ' + (this.status ? this.statusText : 'запрос не удался') );
 	    return;
 	  }
-
-	  reserved =  this.responseText;
+		
+	  
+	  reserved = this.responseText.split(", ");
+		cosole.log(reserved);
 	}
 
     var realEstate = document.querySelector(".real-estate");
