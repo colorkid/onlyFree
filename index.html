@@ -65,7 +65,7 @@
     var index = 0;
 
     for (var i = 0; i < allApartments.length; i++){
-      index = reservedStr.indexOf(allApartments[i].id);
+      index = reserved.indexOf(allApartments[i].id);
       if (index == -1){
         var apartment = document.createElement("div");
         apartment.innerHTML = allApartments[i].name;
