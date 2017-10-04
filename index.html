@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<meta charset="utf-8">
-	<title>Только свободные квартиры</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8">
+  <title>Только свободные квартиры</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
   <body>
-  	<div class="real-estate"></div>
+    <div class="real-estate"></div>
     <script type="text/javascript">
+    //Массив со всеми квартирами
     var allApartments = [
       {
         name: "2-х комнатная квартира на Литейном",
@@ -41,44 +42,34 @@
       }
     ];
 
-    var reserved = "";
-    
-
-	var request = new XMLHttpRequest();
-	request.open('GET', 'reserved.json', true);
-
-	request.onload = function() {
-	  if (this.status >= 200 && this.status < 400) {
-	    // Success!
-	    var data = JSON.parse(this.response);
-		  reserved = data.join(", ");
-		  console.log(reserved);
-	  } else {
-	    // We reached our target server, but it returned an error
-
-	  }
-	};
-
-	request.onerror = function() {
-	  // There was a connection error of some sort
-	};
-
-	request.send();
-
-
     var realEstate = document.querySelector(".real-estate");
-    var index = 0;
 
-    for (var i = 0; i < allApartments.length; i++){
-      index = reserved.indexOf(allApartments[i].id);
-      if (index == -1){
-        var apartment = document.createElement("div");
-        apartment.innerHTML = allApartments[i].name;
-        realEstate.appendChild(apartment);
-      };
+    //Делаю запрос на сервер
+    var request = new XMLHttpRequest();
+    request.open('GET', 'reserved.json', true);
+
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400) {
+         var data = JSON.parse(request.responseText).join(", ");
+         //Запускаю функцию с получеными данными
+         onlyFree(data);
+      } 
     };
- 
-    
+
+    request.send();
+
+    //Функция сравнения двух массивов и рендеринга свободных квартир
+    function onlyFree(reserved){
+      var index = 0;
+      for (var i = 0; i < allApartments.length; i++){
+        index = reserved.indexOf(allApartments[i].id);
+        if (index == -1){
+          var apartment = document.createElement("div");
+          apartment.innerHTML = allApartments[i].name;
+          realEstate.appendChild(apartment);
+        };
+      };
+    }
     </script>
   </body>
 </html> 
